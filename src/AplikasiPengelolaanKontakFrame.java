@@ -356,13 +356,24 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-     String name = namaTextField.getText();
+    String name = namaTextField.getText();
     String phone = teleponTextField.getText();
     String address = alamatTextArea.getText();
     String category = (String) kategoriComboBox.getSelectedItem();
 
+    // Validasi input
     if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || category.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Semua field harus diisi!");
+        return;
+    }
+
+    if (!phone.matches("\\d+")) { // Memastikan hanya angka
+        JOptionPane.showMessageDialog(this, "Nomor telepon hanya boleh berisi angka!");
+        return;
+    }
+
+    if (phone.length() < 10 || phone.length() > 13) { // Memastikan panjang nomor
+        JOptionPane.showMessageDialog(this, "Nomor telepon harus memiliki panjang antara 10-13 angka!");
         return;
     }
 
