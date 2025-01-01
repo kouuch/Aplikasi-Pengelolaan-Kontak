@@ -418,7 +418,7 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         return;
     }
 
-    try {
+        try {
         ContactManager.editContact(id, name, phone, address, category);
         JOptionPane.showMessageDialog(this, "Kontak berhasil diperbarui!");
         refreshTable();
