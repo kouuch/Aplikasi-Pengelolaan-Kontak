@@ -18,6 +18,13 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     public AplikasiPengelolaanKontakFrame() {
         initComponents();
     }
+    private void refreshTable() {
+    try {
+        kontakTable.setModel(ContactManager.getAllContacts());
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
