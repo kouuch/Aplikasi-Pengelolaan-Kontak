@@ -216,6 +216,11 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
 
         editButton.setBackground(new java.awt.Color(51, 51, 255));
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(153, 153, 0));
         jButton4.setText("Import");
@@ -394,6 +399,33 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int selectedRow = kontakTable.getSelectedRow(); // Ambil baris yang dipilih
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih kontak yang akan diedit!");
+        return;
+    }
+
+    int id = (int) kontakTable.getValueAt(selectedRow, 0); // Ambil ID dari baris terpilih
+    String name = namaTextField.getText();
+    String phone = teleponTextField.getText();
+    String address = alamatTextArea.getText();
+    String category = (String) kategoriComboBox.getSelectedItem();
+
+    if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || category.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Semua field harus diisi!");
+        return;
+    }
+
+    try {
+        ContactManager.editContact(id, name, phone, address, category);
+        JOptionPane.showMessageDialog(this, "Kontak berhasil diperbarui!");
+        refreshTable();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
