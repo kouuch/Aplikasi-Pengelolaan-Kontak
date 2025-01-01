@@ -61,4 +61,27 @@ public class ContactManager {
             pstmt.executeUpdate();
         }
     }
+    public static DefaultTableModel searchContacts(String keyword) throws SQLException {
+    String sql = "SELECT * FROM contacts WHERE name LIKE ? OR phone LIKE ?";
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nama", "Telepon", "Alamat", "Kategori"}, 0);
+
+    try (Connection conn = DatabaseHelper.connect();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, "%" + keyword + "%");
+        pstmt.setString(2, "%" + keyword + "%");
+        try (ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("phone"),
+                    rs.getString("address"),
+                    rs.getString("category")
+                });
+            }
+        }
+    }
+    return model;
+}
+
 }
