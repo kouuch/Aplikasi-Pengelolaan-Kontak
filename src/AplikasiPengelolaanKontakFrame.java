@@ -21,6 +21,7 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         initComponents();
         refreshTable();
         kategoriComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Keluarga", "Teman", "Kerja" }));
+        
 
     }
     private void refreshTable() {
@@ -317,16 +318,21 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-         String name = namaTextField.getText();
+     String name = namaTextField.getText();
     String phone = teleponTextField.getText();
     String address = alamatTextArea.getText();
     String category = (String) kategoriComboBox.getSelectedItem();
+
+    if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || category.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Semua field harus diisi!");
+        return;
+    }
 
     try {
         ContactManager.addContact(name, phone, address, category);
         JOptionPane.showMessageDialog(this, "Kontak berhasil disimpan!");
         refreshTable();
-    } catch (Exception ex) {
+    } catch (SQLException ex) {
         JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
     }
     }//GEN-LAST:event_saveButtonActionPerformed
