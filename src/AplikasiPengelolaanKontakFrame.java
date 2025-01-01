@@ -20,6 +20,8 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     public AplikasiPengelolaanKontakFrame() {
         initComponents();
         refreshTable();
+        kategoriComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Keluarga", "Teman", "Kerja" }));
+
     }
     private void refreshTable() {
     try {
