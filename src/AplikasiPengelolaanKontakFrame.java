@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -172,6 +175,11 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
 
         saveButton.setBackground(new java.awt.Color(0, 255, 0));
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setBackground(new java.awt.Color(255, 102, 102));
         deleteButton.setText("Delete");
@@ -295,6 +303,21 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+         String name = namaTextField.getText();
+    String phone = teleponTextField.getText();
+    String address = alamatTextArea.getText();
+    String category = (String) kategoriComboBox.getSelectedItem();
+
+    try {
+        ContactManager.addContact(name, phone, address, category);
+        JOptionPane.showMessageDialog(this, "Kontak berhasil disimpan!");
+        refreshTable();
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
