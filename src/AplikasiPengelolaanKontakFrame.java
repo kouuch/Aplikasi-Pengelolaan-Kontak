@@ -2,6 +2,7 @@
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -72,8 +73,8 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        importButton = new javax.swing.JButton();
+        exportButton = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -222,11 +223,16 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(153, 153, 0));
-        jButton4.setText("Import");
+        importButton.setBackground(new java.awt.Color(153, 153, 0));
+        importButton.setText("Import");
 
-        jButton5.setBackground(new java.awt.Color(153, 153, 0));
-        jButton5.setText("Export");
+        exportButton.setBackground(new java.awt.Color(153, 153, 0));
+        exportButton.setText("Export");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,9 +280,9 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
                                 .addComponent(editButton))
                             .addComponent(rectangleBack12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradientPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton5)
+                                .addComponent(exportButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4)
+                                .addComponent(importButton)
                                 .addGap(44, 44, 44))))
                     .addGroup(gradientPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,8 +308,8 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
                             .addComponent(editButton))
                         .addGap(27, 27, 27)
                         .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5))))
+                            .addComponent(importButton)
+                            .addComponent(exportButton))))
                 .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gradientPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -427,6 +433,26 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_editButtonActionPerformed
 
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Pilih Lokasi File untuk Export");
+    int userSelection = fileChooser.showSaveDialog(this);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+        if (!filePath.endsWith(".csv")) {
+            filePath += ".csv";
+        }
+
+        try {
+            ContactManager.exportContacts(filePath);
+            JOptionPane.showMessageDialog(this, "Data berhasil diexport ke file " + filePath);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
+    }
+    }//GEN-LAST:event_exportButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,9 +492,9 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea alamatTextArea;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JButton exportButton;
     private costum.GradientPanel gradientPanel1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton importButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
