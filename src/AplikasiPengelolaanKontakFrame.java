@@ -225,6 +225,11 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
 
         importButton.setBackground(new java.awt.Color(153, 153, 0));
         importButton.setText("Import");
+        importButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importButtonActionPerformed(evt);
+            }
+        });
 
         exportButton.setBackground(new java.awt.Color(153, 153, 0));
         exportButton.setText("Export");
@@ -452,6 +457,24 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
+       JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Pilih File untuk Import");
+    int userSelection = fileChooser.showOpenDialog(this);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+        try {
+            ContactManager.importContacts(filePath);
+            JOptionPane.showMessageDialog(this, "Data berhasil diimport dari file " + filePath);
+            refreshTable(); // Perbarui tabel setelah import
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
+    }
+    }//GEN-LAST:event_importButtonActionPerformed
 
     /**
      * @param args the command line arguments
