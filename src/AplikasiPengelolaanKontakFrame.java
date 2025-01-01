@@ -223,6 +223,11 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         });
 
         searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         kontakTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -346,6 +351,21 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
     }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+          String keyword = jTextField3.getText(); // Ambil input dari text field pencarian
+
+    if (keyword.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Masukkan kata kunci untuk pencarian!");
+        return;
+    }
+
+    try {
+        kontakTable.setModel(ContactManager.searchContacts(keyword));
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
