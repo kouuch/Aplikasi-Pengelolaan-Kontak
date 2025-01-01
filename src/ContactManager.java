@@ -46,18 +46,20 @@ public class ContactManager {
     }
 
     // Update a contact
-    public static void updateContact(int id, String name, String phone, String address, String category) throws SQLException {
-        String sql = "UPDATE contacts SET name = ?, phone = ?, address = ?, category = ? WHERE id = ?";
-        try (Connection conn = DatabaseHelper.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
-            pstmt.setString(2, phone);
-            pstmt.setString(3, address);
-            pstmt.setString(4, category);
-            pstmt.setInt(5, id);
-            pstmt.executeUpdate();
-        }
+    // Update a contact
+public static void updateContact(int id, String name, String phone, String address, String category) throws SQLException {
+    String sql = "UPDATE contacts SET name = ?, phone = ?, address = ?, category = ? WHERE id = ?";
+    try (Connection conn = DatabaseHelper.connect();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, name);
+        pstmt.setString(2, phone);
+        pstmt.setString(3, address);
+        pstmt.setString(4, category);
+        pstmt.setInt(5, id);
+        pstmt.executeUpdate();
     }
+}
+
 
     // Delete a contact
     public static void deleteContact(int id) throws SQLException {

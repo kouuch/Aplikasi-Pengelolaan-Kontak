@@ -430,12 +430,13 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
     }
 
         try {
-        ContactManager.editContact(id, name, phone, address, category);
-        JOptionPane.showMessageDialog(this, "Kontak berhasil diperbarui!");
-        refreshTable();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-    }
+    ContactManager.updateContact(id, name, phone, address, category);
+    JOptionPane.showMessageDialog(this, "Kontak berhasil diperbarui!");
+    refreshTable();
+} catch (SQLException ex) {
+    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+}
+
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
