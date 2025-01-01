@@ -24,8 +24,8 @@ public class ContactManager {
         DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nama", "Telepon", "Alamat", "Kategori"}, 0);
 
         try (Connection conn = DatabaseHelper.connect();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 model.addRow(new Object[]{
                     rs.getInt("id"),
@@ -38,6 +38,7 @@ public class ContactManager {
         }
         return model;
     }
+
 
     public static void updateContact(int id, String name, String phone, String address, String category) throws SQLException {
         String sql = "UPDATE contacts SET name = ?, phone = ?, address = ?, category = ? WHERE id = ?";

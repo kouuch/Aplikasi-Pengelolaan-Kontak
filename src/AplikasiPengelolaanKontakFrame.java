@@ -22,7 +22,17 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         refreshTable();
         kategoriComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Keluarga", "Teman", "Kerja" }));
         
+        kategoriList.setModel(new javax.swing.AbstractListModel<String>() {
+    String[] strings = { "Keluarga", "Teman", "Kerja" };
 
+    public int getSize() {
+        return strings.length;
+    }
+
+    public String getElementAt(int i) {
+        return strings[i];
+    }
+});
     }
     private void refreshTable() {
     try {
