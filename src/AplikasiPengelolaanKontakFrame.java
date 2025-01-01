@@ -208,6 +208,11 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
 
         deleteButton.setBackground(new java.awt.Color(255, 102, 102));
         deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         editButton.setBackground(new java.awt.Color(51, 51, 255));
         editButton.setText("Edit");
@@ -368,6 +373,27 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
     }
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        int selectedRow = kontakTable.getSelectedRow(); // Ambil baris yang dipilih
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih kontak yang akan dihapus!");
+        return;
+    }
+
+    int id = (int) kontakTable.getValueAt(selectedRow, 0); // Ambil ID dari baris terpilih
+
+    int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin menghapus kontak ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            ContactManager.deleteContact(id);
+            JOptionPane.showMessageDialog(this, "Kontak berhasil dihapus!");
+            refreshTable();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
+    }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
