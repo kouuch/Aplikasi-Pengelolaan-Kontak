@@ -33,6 +33,8 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
         return strings[i];
     }
 });
+        searchButton.addActionListener(evt -> searchButtonActionPerformed(evt));
+
     }
     private void refreshTable() {
     try {
