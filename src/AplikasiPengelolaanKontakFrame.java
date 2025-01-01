@@ -1,5 +1,7 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,6 +19,7 @@ public class AplikasiPengelolaanKontakFrame extends javax.swing.JFrame {
      */
     public AplikasiPengelolaanKontakFrame() {
         initComponents();
+        refreshTable();
     }
     private void refreshTable() {
     try {
